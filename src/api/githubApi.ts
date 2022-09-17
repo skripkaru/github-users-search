@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {Response, IUser, IUserInfo} from "../types";
+import {Response, IUser, IUserInfo, IRepo} from "../types";
 
 export const githubApi = createApi({
   reducerPath: 'githubApi',
@@ -12,7 +12,7 @@ export const githubApi = createApi({
         url: `search/users`,
         params: {
           page: 1,
-          per_page: 5,
+          per_page: 15,
           q: search
         }
       }),
@@ -21,9 +21,46 @@ export const githubApi = createApi({
     getUserByName: builder.query<IUserInfo, string>({
       query: (username) => ({
         url: `users/${username}`,
+        params: {
+          page: 1,
+          per_page: 15,
+        }
       }),
     }),
+    getUserRepos: builder.query<IRepo[], string>({
+      query: (username) => ({
+        url: `users/${username}/repos`,
+        params: {
+          page: 1,
+          per_page: 15,
+        }
+      })
+    }),
+    getUserFollowers: builder.query<IUser[], string>({
+      query: (username) => ({
+        url: `users/${username}/followers`,
+        params: {
+          page: 1,
+          per_page: 15,
+        }
+      })
+    }),
+    getUserFollowing: builder.query<IUser[], string>({
+      query: (username) => ({
+        url: `users/${username}/following`,
+        params: {
+          page: 1,
+          per_page: 15,
+        }
+      })
+    })
   })
 })
 
-export const {useSearchUsersQuery, useLazySearchUsersQuery, useGetUserByNameQuery} = githubApi
+export const {
+  useLazySearchUsersQuery,
+  useGetUserByNameQuery,
+  useGetUserReposQuery,
+  useGetUserFollowersQuery,
+  useGetUserFollowingQuery
+} = githubApi
