@@ -1,39 +1,29 @@
-import React, {useState} from 'react';
-import {useLazySearchUsersQuery} from "../api/githubApi";
+import React from 'react';
 import UserCard from "../components/UserCard";
 import Spinner from "../components/UI/Spinner";
 import Message from "../components/UI/Message";
-import {IUser} from "../types";
+import {useAppSelector} from "../hooks/useAppSelector";
 
 interface HomeProps {
-  users: IUser[]
   isLoading: boolean
   isError: boolean
 }
 
 const Home = (props: HomeProps) => {
-  const {users, isLoading, isError} = props
-
-  // const [search, setSearch] = useState<string>('')
-  // const [searchUsers, {data: users, isLoading, isError}] = useLazySearchUsersQuery()
-  //
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault()
-  //   searchUsers(search)
-  //   setSearch('')
-  // }
+  const {isLoading, isError} = props
+  const {users} = useAppSelector(state => state.users)
 
   return (
     <>
       {isLoading && <Spinner width='100' height='100'/>}
       {isError && <Message>Error</Message>}
-      {users && (
+      {users?.length !== 0 ? (
         <div className='grid grid-cols-3 gap-3'>
           {users?.map(user =>
             <UserCard key={user.id} user={user}/>
           )}
         </div>
-      )}
+      ) : <Message>Users not found</Message>}
     </>
   );
 };

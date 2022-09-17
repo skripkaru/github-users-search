@@ -13,13 +13,13 @@ const Followers = () => {
     <>
       {isLoading && <Spinner width='100' height='100'/>}
       {isError && <Message>Error</Message>}
-      {followers && (
+      {followers?.length !== 0 ? (
         <div className='grid grid-cols-3 gap-3'>
           {followers?.map(follower =>
             <UserCard key={follower.id} user={follower}/>
           )}
         </div>
-      )}
+      ) : <Message>Users not found</Message>}
     </>
   );
 };

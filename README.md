@@ -1,6 +1,6 @@
 # GitHub User Search
 
-Service for searching and viewing information about GitHub users
+A platform for searching and viewing information about GitHub users
 
 ## Tech Stack
 
@@ -8,20 +8,18 @@ Service for searching and viewing information about GitHub users
 
 ## Installation
 
-Install with yarn
-
 ```bash
-  yarn install
+yarn install
 ```
 
-Compiles and hot-reloads for development
+### Compiles and hot-reloads for development
 
 ```bash
-  yarn start
+yarn start
 ```
 
-Compiles and minifies for production
+### Compiles and minifies for production
 
 ```bash
-  yarn build
+yarn build
 ```
