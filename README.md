@@ -1,4 +1,4 @@
-# GitHub User Search
+# GitHub Users Search
 
 A platform for searching and viewing information about GitHub users
 
