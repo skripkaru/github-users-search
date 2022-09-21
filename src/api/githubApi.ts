@@ -4,7 +4,16 @@ import {Response, IUser, IUserInfo, IRepo} from "../types";
 export const githubApi = createApi({
   reducerPath: 'githubApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.github.com/'
+    baseUrl: 'https://api.github.com/',
+    prepareHeaders: (headers) => {
+      const token = process.env.PERSONAL_ACCESS_TOKEN
+
+      if (token) {
+        headers.set('authorization', `token ${token}`)
+      }
+
+      return headers
+    },
   }),
   endpoints: builder => ({
     searchUsers: builder.query<IUser[], string>({

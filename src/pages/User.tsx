@@ -8,20 +8,20 @@ const User = () => {
   const {data: user, isLoading, isError} = useGetUserByNameQuery(username || '')
 
   return (
-    <div className='max-w-[750px] mx-auto'>
+    <div className='w-full max-w-[750px] mx-auto'>
       {isLoading && <Spinner width='100' height='100'/>}
       {isError && <h1 className='text-center'>Error</h1>}
       {user && (
         <div
-          className="flex gap-5 border-gray-200 border p-5 rounded-md"
+          className="flex flex-col md:flex-row gap-5 border-gray-200 border p-5 rounded-md"
           key={user.id}
         >
           <img
-            className="flex-shrink-0 rounded-md w-80 h-80 object-cover object-center"
+            className="flex-shrink-0 rounded-md w-50 sm:w-80 h-50 sm:h-80 object-cover object-center"
             src={user?.avatar_url}
             alt={user?.login}
           />
-          <div className="flex flex-col w-full ">
+          <div className="flex flex-col w-full">
             {user.name && <h2 className="title-font font-medium text-2xl text-gray-900 mb-1">{user.name}</h2>}
             {user.login && <h3 className="text-gray-500 mb-3">@{user.login}</h3>}
             {user.bio && <p className="mb-3 text-base">{user.bio}</p>}
@@ -60,15 +60,15 @@ const User = () => {
                 {user.blog}
               </a>
             )}
-            <span className="inline-flex mt-auto">
+            <span className="inline-flex flex-wrap gap-3 mt-auto">
               {user.public_repos > 0 && (
-                <Link className='text-sm font-medium text-center mr-10' to={`/repos/${username}`}>
+                <Link className='text-sm font-medium text-center' to={`/repos/${username}`}>
                   <span className="block font-bold text-lg">{user.public_repos}</span>
                   Repositories
                 </Link>
               )}
               {user.followers > 0 && (
-                <Link className='text-sm font-medium text-center mr-10' to={`/followers/${username}`}>
+                <Link className='text-sm font-medium text-center' to={`/followers/${username}`}>
                   <span className="block font-bold text-lg">{user.followers}</span>
                   Followers
                 </Link>

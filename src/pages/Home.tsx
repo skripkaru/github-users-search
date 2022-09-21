@@ -18,7 +18,7 @@ const Home = (props: HomeProps) => {
       {isLoading && <Spinner width='100' height='100'/>}
       {isError && <Message>Error</Message>}
       {users?.length !== 0 ? (
-        <div className='grid grid-cols-3 gap-3'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
           {users?.map(user =>
             <UserCard key={user.id} user={user}/>
           )}
